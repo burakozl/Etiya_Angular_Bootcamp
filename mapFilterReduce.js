@@ -67,3 +67,9 @@ let newCart = cart.map(item => {
 console.log(newCart);
 
 // reduce fonksiyonu
+
+let cartTotal = cart.reduce((acc,cartItem) => acc + cartItem.quantity * cartItem.unitPrice,0);
+
+let quantityTotal = cart.reduce((acc,cartItem) => acc + cartItem.quantity,0);
+
+console.log(`Toplam sepet tutarı: ${cartTotal}  Sepette Toplam ${quantityTotal} adet ürün var`);
