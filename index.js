@@ -51,3 +51,17 @@ let odemeBilgileri = {
 	krediTipi: "İhtiyaç Kredisi",
 };
 console.log(odemeBilgileri);
+
+//değer tipler
+let number1 = 10;
+let number2 = 20;
+number1 = number2;
+number2=100;
+console.log(number1);
+
+//referans tipler
+let product1 = {id:1, name: "Laptop", unitPrice: 15000};
+let product2 = {id:1, name: "Mouse", unitPrice: 15000};
+product1 = product2;
+product2.name = "Keyboard";
+console.log(product1);
