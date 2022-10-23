@@ -13,7 +13,6 @@
     "start-oop": "node oop.js",
     "start-oop2": "node oop2.js",
     "start-kodlamaio": "node kodlamaio.js"
-
   },
   "keywords": [],
   "author": "",
