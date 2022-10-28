@@ -1,0 +1,12 @@
+
+
+<ul *ngIf="categories.length > 4">
+  <ng-template ngFor let-category [ngForOf]="categories">
+    <li *ngIf="category.length >3 ">{{category}}</li>
+  </ng-template>
+</ul>
+
+<!--
+<ng-container *ngFor="let item of categories">
+  <li *ngIf="item.length >3 ">{{item}}</li>
+</ng-container> -->
