@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-list',
@@ -11,6 +12,9 @@ export class ProductListComponent implements OnInit {
 
   name:string = '';
 
+  inputForm = new FormGroup({
+    name : new FormControl('',[Validators.required]),
+  });
 
   constructor() {
 

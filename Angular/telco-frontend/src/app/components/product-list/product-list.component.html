@@ -1,9 +1,10 @@
-<form>
+<form [formGroup]="inputForm">
   <div>
-    <input type="text" name="name" [(ngModel)]="name" />
+    <input formControlName="name" type="text" id="name" [(ngModel)]="name" />
+    <p *ngIf="inputForm.get('name')?.hasError('required')"> Ürün adı zorunludur </p>
   </div>
   <div>
-    <button (click)="addProducts(name)">Ekle</button>
+    <button (click)="addProducts(name)" [disabled]="inputForm.invalid">Ekle</button>
   </div>
 </form>
 

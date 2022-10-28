@@ -7,7 +7,7 @@ import { CalculatorComponent } from './components/calculator/calculator.componen
 import { ListviewComponent } from './components/listview/listview.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { FormsModule  } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { FormsModule  } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [],
   providers: [],
