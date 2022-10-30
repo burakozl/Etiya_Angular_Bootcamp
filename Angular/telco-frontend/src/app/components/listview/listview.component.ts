@@ -51,6 +51,8 @@ export class ListviewComponent implements OnInit {
     if(this.categoryAddForm.invalid){
       this.error = "Form is invalid";
       return;
+    }else{
+      this.error = "";
     }
 
     if(this.formButton === "Add"){
@@ -98,8 +100,8 @@ export class ListviewComponent implements OnInit {
 
   delete(){
     this.categoriesService.delete(this.categoryIdToDelete).subscribe({
-      next: (res) => {
-        console.log(`Category (${res}) deleted`);
+      next: () => {
+        console.log(`Category (${this.categoryIdToDelete}) deleted`);
       },
       error: (err) => {
         console.log("Hataaa: "+ err.message);
