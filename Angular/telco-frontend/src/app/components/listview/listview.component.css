@@ -22,4 +22,47 @@ ul li {
   color: darkblue;
   margin: 5px;
   list-style-type: none;
+  display: inline-block;
+  padding: 5px;
+}
+.editBtn{
+  padding: 8px 16px;
+  background-color: blue;
+}
+.title{
+  width: 30%;
+}
+.desc{
+  width: 60%;
+}
+.addForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h3{
+  text-align: center;
+}
+.addFormBtn{
+  display: flex;
+  justify-content: center;
+}
+.err{
+  color: red;
+  font-size: large;
+  font-weight: 800;
+}
+@media only screen and (max-width:1305px) {
+  .title{
+    width: 20%;
+  }
+  .desc{
+    width: 60%;
+  }
+
+}
+@media screen and (max-width: 682px) {
+  ul li {
+    width: auto;
+  }
 }

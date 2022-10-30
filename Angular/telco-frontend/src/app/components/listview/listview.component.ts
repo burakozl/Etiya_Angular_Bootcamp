@@ -16,9 +16,14 @@ export class ListviewComponent implements OnInit {
 
   categoryIdToDelete !:number;
 
+  categoryIdToUpdate !:number;
+
   categoryAddForm!:FormGroup;
 
   error!:string;
+
+  formTitle:string = "Forms - Add";
+  formButton:string = "Add";
 
   constructor(private categoriesService:CategoriesService, private formBuilder:FormBuilder) {}
 
@@ -41,29 +46,54 @@ export class ListviewComponent implements OnInit {
     });
   }
 
-  addCategory(){
+  addOrUpdateCategory(){
+
     if(this.categoryAddForm.invalid){
       this.error = "Form is invalid";
       return;
     }
-    //const {name , description} = this.categoryAddForm.value;
-    const category: Category = {
-      ...this.categoryAddForm.value
-    };
 
-    this.categoriesService.add(category).subscribe({
-      next: (res) => {
-        console.log(`Category (${res.id}) added`);
-      },
-      error: (err) => {
-        console.log(err);
-        this.error = err.message;
-      },
-      complete: () => {
-        this.getCategories();
-        this.categoryAddForm.reset();
-      }
-    });
+    if(this.formButton === "Add"){
+      //const {name , description} = this.categoryAddForm.value;
+      const addCategory: Category = {
+        ...this.categoryAddForm.value
+      };
+      this.categoriesService.add(addCategory).subscribe({
+        next: (res) => {
+          console.log(`Category (${res.id}) added`);
+        },
+        error: (err) => {
+          console.log(err);
+          this.error = err.message;
+        },
+        complete: () => {
+          this.getCategories();
+          this.categoryAddForm.reset();
+        }
+      });
+    }else{
+      const updateCategory: Category = {
+        id: this.categoryIdToUpdate,
+        name: this.categoryAddForm.get('name')?.value,
+        description: this.categoryAddForm.get('description')?.value
+      };
+
+      this.categoriesService.update(updateCategory).subscribe({
+        next: (res) => {
+          console.log(`Category (${res.id}) updated`);
+        },
+        error: (err) => {
+          console.log(err);
+          this.error = err.message;
+        },
+        complete: () => {
+          this.getCategories();
+          this.categoryAddForm.reset();
+          this.formTitle = "Forms - Add";
+          this.formButton = "Add";
+        }
+      });
+    }
   }
 
   delete(){
@@ -81,5 +111,17 @@ export class ListviewComponent implements OnInit {
     });
   }
 
+  editCategory(category:Category){
+
+    this.formTitle = `Forms - Update ${category.id}`;
+    this.formButton = "Update";
+
+    this.categoryIdToUpdate = category.id;
+
+    this.categoryAddForm.patchValue({
+      name: category.name,
+      description: category.description,
+    });
+  }
 
 }
