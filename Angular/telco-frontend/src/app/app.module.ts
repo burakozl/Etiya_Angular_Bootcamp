@@ -12,6 +12,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { CreateFakeArrayPipe } from './pipes/create-fake-array.pipe';
 import { SplitPipe } from './pipes/split.pipe';
+import { CardsComponent } from './pages/cards/cards.component';
+import { FooterComponent } from './pages/footer/footer.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoadingComponent } from './pages/loading/loading.component';
+import { LoginComponent } from './pages/login/login.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +27,13 @@ import { SplitPipe } from './pipes/split.pipe';
     ListviewComponent,
     ProductListComponent,
     CreateFakeArrayPipe,
-    SplitPipe
+    SplitPipe,
+    CardsComponent,
+    FooterComponent,
+    HeaderComponent,
+    HomeComponent,
+    LoadingComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +44,8 @@ import { SplitPipe } from './pipes/split.pipe';
   ],
   exports: [],
   providers: [
-    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor, multi:true}
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
