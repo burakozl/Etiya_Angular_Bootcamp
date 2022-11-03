@@ -5,8 +5,8 @@
 </ul> -->
 
 <ul>
-  <ng-container *ngFor="let item of categories">
-    <li class="title" *ngIf="item.name.length >3 ">{{item.id}}-{{item.name}}</li>
+  <ng-container *ngFor="let item of categories; let i=index">
+    <li class="title" *ngIf="item.name.length >3 ">{{ i + 1 }}-{{item.name}}</li>
     <li class="desc">{{item.description}}</li>
     <button class="editBtn" (click)="editCategory(item)">Edit</button>
   </ng-container>
