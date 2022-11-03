@@ -14,11 +14,11 @@ export class LoadingService {
 
   startLoading(){
     this.pendingRequestCount++;
-    this.isLoadingSubject.next(this.pendingRequestCount > 0);
+    this.isLoadingSubject.next(true);
   }
 
   stopLoading(){
     this.pendingRequestCount--;
-    this.isLoadingSubject.next(this.pendingRequestCount > 0);
+    this.isLoadingSubject.next(false);
   }
 }

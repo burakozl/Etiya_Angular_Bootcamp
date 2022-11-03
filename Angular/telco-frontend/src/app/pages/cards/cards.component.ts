@@ -26,18 +26,20 @@ export class CardsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.isPageLoading();
-    // this.loading();
+    this.isPageLoading();
+    this.loading();
     this.createServiceAddForm();
     this.getServices();
   }
 
   getServices() {
     // Object tipi henüz belli olmayan referans tip diyebiliriz. Referans tiplerin en temel sınıfı diyebiliriz.
-    this.servicesService.getServices().subscribe((response) => {
-      //Observer design pattern
-      this.services = response;
-    });
+    setTimeout(() => {
+      this.servicesService.getServices().subscribe((response) => {
+        //Observer design pattern
+        this.services = response;
+      });
+    }, 1000);
   }
 
   edit(service: Service) {

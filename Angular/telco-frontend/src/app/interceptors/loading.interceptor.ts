@@ -17,9 +17,10 @@ export class LoadingInterceptor implements HttpInterceptor {
     this.loadingService.startLoading();
 
     return next.handle(request).pipe(finalize(() => {
-      setTimeout(() => {
-        this.loadingService.stopLoading();
-      },3000)
+      // setTimeout(() => {
+      //   this.loadingService.stopLoading();
+      // },3000)
+      this.loadingService.stopLoading();
 
     }));
   }
