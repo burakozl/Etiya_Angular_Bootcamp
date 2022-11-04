@@ -10,7 +10,7 @@ export class LoadingService {
 
   pendingRequestCount: number = 0;
 
-  constructor() { }
+  constructor() {}
 
   startLoading(){
     this.pendingRequestCount++;

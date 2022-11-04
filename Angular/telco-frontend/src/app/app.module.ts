@@ -19,6 +19,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoadingComponent } from './pages/loading/loading.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { JwtModule } from "@auth0/angular-jwt";
+import { FilterServicePipe } from './pipes/filter-service.pipe';
+import { CustomersComponent } from './pages/customers/customers.component';
+import { CustomerDetailComponent } from './pages/customer-detail/customer-detail.component';
+import { FilterCorporateCustomersPipe } from './pipes/filter-corporate-customers.pipe';
 
 @NgModule({
   declarations: [
@@ -33,14 +40,29 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     HeaderComponent,
     HomeComponent,
     LoadingComponent,
-    LoginComponent
+    LoginComponent,
+    FilterServicePipe,
+    CustomersComponent,
+    CustomerDetailComponent,
+    FilterCorporateCustomersPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(
+      {positionClass: 'toast-bottom-center'},
+    ),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        }
+      },
+    }),
   ],
   exports: [],
   providers: [
