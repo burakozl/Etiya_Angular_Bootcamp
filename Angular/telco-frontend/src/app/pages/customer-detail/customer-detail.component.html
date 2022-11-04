@@ -1,44 +1,3 @@
-<!-- <div class="container p-5">
-
-  <div class="row" >
-    <div class="col-md-4">
-      <img src="assets/images/img_avatar.png" alt="avatar" width="auto">
-    </div>
-    <div class="col-md-8 mt-3" *ngFor="let item of individualCustomer">
-      <h2>Customer Name: {{item.firstName}}{{item.lastName}}</h2>
-      <h3>National Identity: {{item.nationalIdentity}}</h3>
-    </div>
-    <div *ngFor="let item of filteredService">
-      <h3>Abone olduğu servis ({{item.id}}): {{item.name}}</h3>
-    </div>
-    <div *ngFor="let item of subscription">
-      <h3>Abone olduğu tarih: {{item.dateStarted}}</h3>
-    </div>
-  </div> -->
-
-  <!-- <div class="row" *ngIf="customerId % 2 === 0">
-    <div class="col-md-4">
-      <img src="assets/images/img_avatar.png" alt="avatar" width="auto">
-    </div>
-    <div class="col-md-8 mt-3" *ngFor="let item of corporateCustomer">
-      <h2>Company Name: {{item.companyName}}</h2>
-      <h3>Tax Number: {{item.taxNumber}}</h3>
-    </div>
-    <div *ngFor="let item of filteredService">
-      <h3>Abone olduğu servis ({{item.id}}): {{item.name}}</h3>
-    </div>
-    <div *ngFor="let item of subscription">
-      <h3>{{item.serviceId}} numaralı servise abone olduğu tarih: {{item.dateStarted}}</h3>
-    </div>
-  </div> -->
-
-
-
-<!-- </div> -->
-
- <!-- doğum tarihi eklenicek
-    kullandığı service buraya gelicek
-    başlama tarihi-->
 <div class="row mt-5" *ngIf="customerId % 2 === 1">
     <div class="col-lg-4" >
       <div class="card mb-4" *ngFor="let item of individualCustomer">
@@ -46,8 +5,8 @@
           <img src="assets/images/img_avatar.png" alt="avatar" width="auto"
             class="rounded-circle img-fluid" style="width: 150px;">
           <h5 class="my-3">{{item.firstName}} {{item.lastName}}</h5>
-          <p class="text-muted mb-1">National Identity</p>
-          <p class="text-muted mb-4">{{item.nationalIdentity}}</p>
+          <p class="text-muted mb-1">Birthday</p>
+          <p class="text-muted mb-4">{{item.dateOfBirth}}</p>
           <div class="d-flex justify-content-center mb-2">
           </div>
         </div>
@@ -56,6 +15,15 @@
       <div class="col-lg-8 mt-5" >
         <div class="card mb-4">
           <div class="card-body">
+            <div class="row" *ngFor="let item of individualCustomer">
+              <div class="col-sm">
+                <p class="mb-0">National Identity</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{item.nationalIdentity}}</p>
+              </div>
+            </div>
+            <hr>
             <div class="row" *ngFor="let item of individualCustomer">
               <div class="col-sm">
                 <p class="mb-0">Full Name</p>

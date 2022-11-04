@@ -20,6 +20,8 @@ export class CustomersComponent implements OnInit {
   individuals!:IndividualCustomers[];
   corporates!:CorporateCustomers[];
   selectedCustomer:boolean = true;
+  dateOfBirth!:string;
+  today:string = new Date().getFullYear().toString();
 
   constructor(private individualCustomers:IndividualCustomersService,private corporateCustomers:CorporateCustomersService) { }
 
@@ -40,6 +42,5 @@ export class CustomersComponent implements OnInit {
       this.corporates = res;
     })
     this.selectedCustomer = false;
-
  }
 }

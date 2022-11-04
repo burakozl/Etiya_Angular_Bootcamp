@@ -26,6 +26,7 @@ import { FilterServicePipe } from './pipes/filter-service.pipe';
 import { CustomersComponent } from './pages/customers/customers.component';
 import { CustomerDetailComponent } from './pages/customer-detail/customer-detail.component';
 import { FilterCorporateCustomersPipe } from './pipes/filter-corporate-customers.pipe';
+import { FilterDatePipe } from './pipes/filter-date.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FilterCorporateCustomersPipe } from './pipes/filter-corporate-customers
     FilterServicePipe,
     CustomersComponent,
     CustomerDetailComponent,
-    FilterCorporateCustomersPipe
+    FilterCorporateCustomersPipe,
+    FilterDatePipe
   ],
   imports: [
     BrowserModule,
