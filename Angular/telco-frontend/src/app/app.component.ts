@@ -9,6 +9,7 @@ export class AppComponent  {
   title = 'telco-frontend12';
 
   today: Date = new Date();
+  overlayTitleText: string = 'Hoşgeldiniz...';
 
   constructor() {}
 

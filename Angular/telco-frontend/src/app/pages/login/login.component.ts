@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
           this.localStorageService.set('token', this.data.access_token);
           this.localStorageService.isUserLoggedIn.subscribe();
           this.localStorageService.login();
-          this.router.navigateByUrl('home');
+          this.router.navigateByUrl('/home');
         },
       });
     }

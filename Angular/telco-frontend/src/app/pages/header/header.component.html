@@ -30,10 +30,10 @@
     <div class="collapse navbar-collapse" id="navbarButtonsExample">
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" routerLink="home">Home</li>
+        <li class="nav-item" routerLink="home" routerLinkActive="active"><b>Home</b></li>
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" routerLink="customers">Customers</li>
+        <li class="nav-item" routerLink="customers" routerLinkActive="active"><b>Customers</b></li>
       </ul>
       <!-- Left links -->
 
@@ -42,7 +42,7 @@
           *ngIf="!isLogin"
           type="button"
           (click)="login()"
-          class="btn btn-link px-3 me-2"
+          class="btn btn-success px-3 me-2"
         >
           Login
         </button>
@@ -50,7 +50,7 @@
           *ngIf="isLogin"
           type="button"
           (click)="logout()"
-          class="btn btn-link px-3 me-2"
+          class="btn btn-danger px-3 me-2"
         >
           Logout
         </button>
