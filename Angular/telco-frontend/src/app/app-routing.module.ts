@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './guards/login.guard';
+import { CreateCustomerComponent } from './pages/create-customer/create-customer.component';
 import { CustomerDetailComponent } from './pages/customer-detail/customer-detail.component';
 import { CustomersComponent } from './pages/customers/customers.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'customer-detail/:id',
     component: CustomerDetailComponent,
     canActivate:[LoginGuard]
+  },
+  {
+    path: 'create-customer',
+    component: CreateCustomerComponent,
+    canActivate: [LoginGuard],
   },
 ];
 

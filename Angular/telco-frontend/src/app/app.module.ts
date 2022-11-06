@@ -27,6 +27,7 @@ import { CustomersComponent } from './pages/customers/customers.component';
 import { CustomerDetailComponent } from './pages/customer-detail/customer-detail.component';
 import { FilterCorporateCustomersPipe } from './pipes/filter-corporate-customers.pipe';
 import { OverlayTitleComponent } from './components/overlay-title/overlay-title.component';
+import { CreateCustomerComponent } from './pages/create-customer/create-customer.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { OverlayTitleComponent } from './components/overlay-title/overlay-title.
     CustomersComponent,
     CustomerDetailComponent,
     FilterCorporateCustomersPipe,
-    OverlayTitleComponent
+    OverlayTitleComponent,
+    CreateCustomerComponent
   ],
   imports: [
     BrowserModule,
