@@ -4,6 +4,7 @@ import { CorporateCustomers } from 'src/app/models/corporateCustomers';
 import { CorporateCustomersService } from 'src/app/services/corporate-customers.service';
 import { IndividualCustomers } from 'src/app/models/individualCustomers';
 import { IndividualCustomersService } from 'src/app/services/individual-customers.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -23,7 +24,7 @@ export class CustomersComponent implements OnInit {
   dateOfBirth!:string;
   today:string = new Date().getFullYear().toString();
 
-  constructor(private individualCustomers:IndividualCustomersService,private corporateCustomers:CorporateCustomersService) { }
+  constructor(private individualCustomers:IndividualCustomersService,private corporateCustomers:CorporateCustomersService,private router: Router) { }
 
   ngOnInit(): void {
     this.getIndividualCustomers();
@@ -43,4 +44,7 @@ export class CustomersComponent implements OnInit {
     })
     this.selectedCustomer = false;
  }
+ goToAddCustomerPage() {
+  this.router.navigateByUrl('/create-customer');
+}
 }
