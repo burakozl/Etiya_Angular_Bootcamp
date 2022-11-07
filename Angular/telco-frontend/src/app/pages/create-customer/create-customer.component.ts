@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { CorporateCustomers } from 'src/app/models/corporateCustomers';
+import { CorporateCustomersService } from 'src/app/services/corporate-customers.service';
+import { IndividualCustomers } from 'src/app/models/individualCustomers';
+import { IndividualCustomersService } from 'src/app/services/individual-customers.service';
+import { Service } from 'src/app/models/service';
+import { ServicesService } from 'src/app/services/services.service';
+import { ToastrMessageService } from 'src/app/services/toastr-message.service';
 
 @Component({
   selector: 'app-create-customer',
@@ -10,14 +18,30 @@ export class CreateCustomerComponent implements OnInit {
 
   createIndividualCustomer!: FormGroup;
   createCorporateCustomer!: FormGroup;
-
+  servicesForm:boolean = false;
   isChecked:boolean = true;
+  title:string = "Customer Type";
+  services!: Service[];
+  serviceForm!: FormGroup;
+  stepCount:number = 0;
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor(
+    private formBuilder:FormBuilder,
+    private servicesService:ServicesService,
+    private individualCustomerService:IndividualCustomersService,
+    private corporateCustomerService:CorporateCustomersService,
+    private toastrService:ToastrMessageService
+    ) {
+      this.serviceForm = formBuilder.group({
+        selectedServices:  new FormArray([])
+       });
+     }
 
   ngOnInit(): void {
     this.createIndividualCustomerForm();
     this.createCorporateCustomerForm();
+    this.getServices();
+
   }
 
   createIndividualCustomerForm(){
@@ -40,5 +64,65 @@ export class CreateCustomerComponent implements OnInit {
 
   clickCustomerOption(selectedChoice:boolean) {
     this.isChecked = selectedChoice;
+
+  }
+
+  goNextForm(){
+    if(this.isChecked && this.stepCount === 0 ){
+      this.servicesForm = true;
+      this.title = "Services";
+      //this.store.dispatch(this.createIndividualCustomer.value);
+      this.saveIndividualStore(this.createIndividualCustomer.value);
+      //console.log(this.createIndividualCustomer.value);
+      this.stepCount++;
+
+    }else if(!this.isChecked && this.stepCount === 0){
+      this.servicesForm = true;
+      this.title = "Services";
+      //this.store.dispatch(this.createIndividualCustomer.value);
+      this.saveCorporateStore(this.createCorporateCustomer.value);
+      this.stepCount++;
+    }else if(this.stepCount === 1){
+      //Todo : store 'a service kaydını yap
+      //özet sayfası gösterilecek
+    }else{
+      this.toastrService.error("Form alanı zorunludur","Sistem Mesajı :")
+    }
+
+  }
+
+  getServices() {
+    this.servicesService.getServices().subscribe((response) => {
+      this.services = response;
+   })
+  }
+
+  onCheckboxChange(event: any) {
+
+    const selectedServices = (this.serviceForm.controls['selectedServices'] as FormArray);
+    if (event.target.checked) {
+      selectedServices.push(new FormControl(event.target.value));
+    } else {
+      const index = selectedServices.controls
+      .findIndex(x => x.value === event.target.value);
+      selectedServices.removeAt(index);
+    }
+  }
+  submit() {
+    console.log(this.serviceForm.value);
+  }
+
+  saveIndividualStore(Customer:IndividualCustomers){
+    this.individualCustomerService.saveIndividualCustomer(Customer);
+    this.individualCustomerService.individualCustomerModel$.subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  saveCorporateStore(Customer:CorporateCustomers){
+    this.corporateCustomerService.saveCorporateCustomer(Customer);
+    this.corporateCustomerService.CorporateCustomerModel$.subscribe((res) => {
+      console.log(res);
+    });
   }
 }

@@ -4,9 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthLoginService } from 'src/app/services/auth-login.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ToastrMessageService } from 'src/app/services/toastr-message.service';
 import { User } from 'src/app/models/user';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +21,7 @@ export class LoginComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private toastr: ToastrService
+    private toasterService:ToastrMessageService
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if(!this.loginForm.valid){
-      this.toastr.error('Form alanı zorunludur', 'Sistem mesajı :');
+      this.toasterService.error('Form alanı zorunludur', 'Sistem mesajı :')
     }else{
       const userLogin: User = {
         ...this.loginForm.value,

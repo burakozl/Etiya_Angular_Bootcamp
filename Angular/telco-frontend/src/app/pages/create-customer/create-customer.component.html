@@ -2,64 +2,38 @@
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div
-          class="card shadow-2-strong card-registration"
-          style="border-radius: 15px"
-        >
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-3 pb-2 pb-md-0 mb-md-3 text-center">
-              Select Customer Type
+              Select {{ title }}
             </h3>
-            <div class="col-md-12 mb-4 d-flex justify-content-center">
+            <div class="col-md-12 mb-4 d-flex justify-content-center" *ngIf="!servicesForm">
               <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="individualCustomer"
-                  (click)="clickCustomerOption(true)"
-                  [checked]="isChecked"
-                />
-                <label class="form-check-label" for="femaleGender"
-                  >Individual Customers {{ isChecked }}
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="individualCustomer"
+                  (click)="clickCustomerOption(true)" [checked]="isChecked" />
+                <label class="form-check-label" for="femaleGender">Individual Customers {{ isChecked }}
                 </label>
               </div>
               <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="corporateCustomers"
-                  value="corporateCustomers"
-                  (click)="clickCustomerOption(false)"
-                  [checked]="!isChecked"
-                />
-                <label class="form-check-label" for="otherGender"
-                  >Corporate Customers
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="corporateCustomers"
+                  value="corporateCustomers" (click)="clickCustomerOption(false)" [checked]="!isChecked" />
+                <label class="form-check-label" for="otherGender">Corporate Customers
                 </label>
               </div>
             </div>
-            <form *ngIf="isChecked" [formGroup]="createIndividualCustomer">
+            <form *ngIf="isChecked && !servicesForm" [formGroup]="createIndividualCustomer">
               <div class="row">
                 <div class="col-md-12 mb-4">
                   <label class="form-label" for="customerId">CustomerID</label>
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="customerId"
-                      class="form-control form-control-lg"
-                      formControlName="customerId"
-                    />
-                    <div
-                    *ngIf="
+                    <input type="text" id="customerId" class="form-control form-control-lg"
+                      formControlName="customerId" />
+                    <div *ngIf="
                       createIndividualCustomer.get('customerId')?.hasError('required') &&
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  CustomerID is required
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      CustomerID is required
+                    </div>
                   </div>
 
                 </div>
@@ -68,43 +42,26 @@
                 <div class="col-md-6 mb-4">
                   <label class="form-label" for="firstName">First Name</label>
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="firstName"
-                      class="form-control form-control-lg"
-                      formControlName="firstName"
-                    />
-                    <div
-                    *ngIf="
+                    <input type="text" id="firstName" class="form-control form-control-lg"
+                      formControlName="firstName" />
+                    <div *ngIf="
                       createIndividualCustomer.get('firstName')?.hasError('required') &&
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  First Name is required
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      First Name is required
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <label class="form-label" for="lastName">Last Name</label>
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="lastName"
-                      class="form-control form-control-lg"
-                      formControlName="lastName"
-                    />
-                    <div
-                    *ngIf="
+                    <input type="text" id="lastName" class="form-control form-control-lg" formControlName="lastName" />
+                    <div *ngIf="
                       createIndividualCustomer.get('lastName')?.hasError('required') &&
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  Last Name is required
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      Last Name is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -113,42 +70,26 @@
                 <div class="col-md-12 mb-4">
                   <label class="form-label" for="nationalIdentity">National Identity</label>
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="nationalIdentity"
-                      class="form-control form-control-lg"
-                      formControlName="nationalIdentity"
-                    />
-                    <div
-                    *ngIf="
+                    <input type="text" id="nationalIdentity" class="form-control form-control-lg"
+                      formControlName="nationalIdentity" />
+                    <div *ngIf="
                       createIndividualCustomer.get('nationalIdentity')?.hasError('required') &&
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  National Identity is required
-                  </div>
-                  <div
-                    *ngIf="
+                    " class="alert alert-danger" role="alert">
+                      National Identity is required
+                    </div>
+                    <div *ngIf="
                       createIndividualCustomer.get('nationalIdentity')?.hasError('minlength') &&
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  National Identity length must be minimum 11 character
-                  </div>
-                  <div
-                    *ngIf="
+                    " class="alert alert-danger" role="alert">
+                      National Identity length must be minimum 11 character
+                    </div>
+                    <div *ngIf="
                       createIndividualCustomer.get('nationalIdentity')?.hasError('maxlength') &&
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  National Identity length must be maximum 11 character
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      National Identity length must be maximum 11 character
+                    </div>
                   </div>
                 </div>
               </div>
@@ -156,55 +97,31 @@
                 <div class="col-md-12 mb-4">
                   <label class="form-label" for="dateOfBirth">Birthday</label>
                   <div class="form-outline">
-                    <input
-                      type="date"
-                      id="dateOfBirth"
-                      class="form-control form-control-lg"
-                      formControlName="dateOfBirth"
-                    />
-                    <div
-                    *ngIf="
+                    <input type="date" id="dateOfBirth" class="form-control form-control-lg"
+                      formControlName="dateOfBirth" />
+                    <div *ngIf="
                       createIndividualCustomer.get('dateOfBirth')?.hasError('required') &&
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  Birthday is required
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      Birthday is required
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div class="mt-4 pt-2">
-                <input
-                  class="btn btn-primary btn-lg"
-                  type="submit"
-                  value="Submit"
-                />
-              </div>
             </form>
-            <form *ngIf="!isChecked" [formGroup]="createCorporateCustomer">
+            <form *ngIf="!isChecked && !servicesForm" [formGroup]="createCorporateCustomer">
               <div class="row">
                 <div class="col-md-12 mb-4">
                   <label class="form-label" for="customerId">CustomerID</label>
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="customerId"
-                      class="form-control form-control-lg"
-                      formControlName="customerId"
-                    />
-                    <div
-                    *ngIf="
+                    <input type="text" id="customerId" class="form-control form-control-lg"
+                      formControlName="customerId" />
+                    <div *ngIf="
                       createCorporateCustomer.get('customerId')?.hasError('required') &&
                       (createCorporateCustomer.dirty || createCorporateCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  CustomerId is required
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      ustomerId is required
+                    </div>
                   </div>
                 </div>
               </div>
@@ -212,66 +129,57 @@
                 <div class="col-md-6 mb-4">
                   <label class="form-label" for="companyName">Company Name</label>
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="companyName"
-                      class="form-control form-control-lg"
-                      formControlName="companyName"
-                    />
-                    <div
-                    *ngIf="
+                    <input type="text" id="companyName" class="form-control form-control-lg"
+                      formControlName="companyName" />
+                    <div *ngIf="
                       createCorporateCustomer.get('companyName')?.hasError('required') &&
                       (createCorporateCustomer.dirty || createCorporateCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  Company Name is required
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      Company Name is required
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <label class="form-label" for="taxNumber">Tax Number</label>
                   <div class="form-outline">
-                    <input
-                      type="text"
-                      id="taxNumber"
-                      class="form-control form-control-lg"
-                      formControlName="taxNumber"
-                    />
-                    <div
-                    *ngIf="
+                    <input type="text" id="taxNumber" class="form-control form-control-lg"
+                      formControlName="taxNumber" />
+                    <div *ngIf="
                       createCorporateCustomer.get('taxNumber')?.hasError('required') &&
                       (createCorporateCustomer.dirty || createCorporateCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  Tax Number is required
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      Tax Number is required
+                    </div>
 
-                    <div
-                    *ngIf="
+                    <div *ngIf="
                       createCorporateCustomer.get('taxNumber')?.hasError('minlength') &&
                       (createCorporateCustomer.dirty || createCorporateCustomer.touched)
-                    "
-                    class="alert alert-danger"
-                    role="alert"
-                  >
-                  Tax Number length must be 8 character
-                  </div>
+                    " class="alert alert-danger" role="alert">
+                      Tax Number length must be 8 character
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div class="mt-4 pt-2">
-                <input
-                  class="btn btn-primary btn-lg"
-                  type="submit"
-                  value="Submit"
-                />
-              </div>
             </form>
+
+            <div *ngIf="servicesForm">
+              <hr class="solid">
+              <form [formGroup]="serviceForm" (ngSubmit)="submit()">
+                <div class="row">
+                  <div class="col-lg-6" *ngFor="let service of services">
+                    <label class="services">{{service.name}}
+                      <input type="checkbox" formArrayName="selectedServices" [value]="service.name"
+                        (change)="onCheckboxChange($event)" />
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <p>{{ serviceForm.value | json }}</p>
+            <div class="mt-4 pt-2">
+              <button class="btn btn-primary btn-lg" (click)="goNextForm()">Next</button>
+            </div>
           </div>
         </div>
       </div>
