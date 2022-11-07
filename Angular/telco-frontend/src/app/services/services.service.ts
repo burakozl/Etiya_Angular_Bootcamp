@@ -1,16 +1,25 @@
+import { AppStoreState } from '../store/app.state';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Service } from '../models/service';
+import { Store } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
+import { setServicesModel } from '../store/customer/customer.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServicesService {
-  controllerUrl = `${environment.apiUrl}/services`;
+  private controllerUrl = `${environment.apiUrl}/services`;
 
-  constructor(private httpClient: HttpClient) {}
+  serviceModel$:Observable<Service | null>;
+
+  constructor(private httpClient: HttpClient,private store: Store<AppStoreState>) {
+    this.serviceModel$ = this.store.select(
+      (state) => state.customer.serviceModel
+    );
+  }
 
   getServices(): Observable<Service[]> {
     //get metodu Get Http istediğini hazırlıyor.
@@ -30,5 +39,9 @@ export class ServicesService {
 
   delete(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.controllerUrl}/${id}`);
+  }
+
+  saveServices(services: Service) {
+    this.store.dispatch(setServicesModel( {services}));
   }
 }

@@ -27,9 +27,9 @@ export class CreateCustomerComponent implements OnInit {
 
   constructor(
     private formBuilder:FormBuilder,
-    private servicesService:ServicesService,
     private individualCustomerService:IndividualCustomersService,
     private corporateCustomerService:CorporateCustomersService,
+    private servicesService:ServicesService,
     private toastrService:ToastrMessageService
     ) {
       this.serviceForm = formBuilder.group({
@@ -85,6 +85,7 @@ export class CreateCustomerComponent implements OnInit {
     }else if(this.stepCount === 1){
       //Todo : store 'a service kaydını yap
       //özet sayfası gösterilecek
+      this.saveServicesStore(this.serviceForm.value);
     }else{
       this.toastrService.error("Form alanı zorunludur","Sistem Mesajı :")
     }
@@ -100,6 +101,7 @@ export class CreateCustomerComponent implements OnInit {
   onCheckboxChange(event: any) {
 
     const selectedServices = (this.serviceForm.controls['selectedServices'] as FormArray);
+
     if (event.target.checked) {
       selectedServices.push(new FormControl(event.target.value));
     } else {
@@ -108,21 +110,26 @@ export class CreateCustomerComponent implements OnInit {
       selectedServices.removeAt(index);
     }
   }
-  submit() {
-    console.log(this.serviceForm.value);
-  }
 
-  saveIndividualStore(Customer:IndividualCustomers){
-    this.individualCustomerService.saveIndividualCustomer(Customer);
+  saveIndividualStore(customer:IndividualCustomers){
+    this.individualCustomerService.saveIndividualCustomer(customer);
     this.individualCustomerService.individualCustomerModel$.subscribe((res) => {
-      console.log(res);
+      console.log("individual :" , res);
     });
   }
 
-  saveCorporateStore(Customer:CorporateCustomers){
-    this.corporateCustomerService.saveCorporateCustomer(Customer);
+  saveCorporateStore(customer:CorporateCustomers){
+    this.corporateCustomerService.saveCorporateCustomer(customer);
     this.corporateCustomerService.CorporateCustomerModel$.subscribe((res) => {
-      console.log(res);
+      console.log("corporate :",res);
     });
   }
+
+  saveServicesStore(services:Service){
+    this.servicesService.saveServices(services);
+    this.servicesService.serviceModel$.subscribe((res) => {
+      console.log("services :",res);
+    })
+  }
+
 }

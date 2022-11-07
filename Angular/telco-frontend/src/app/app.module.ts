@@ -70,7 +70,7 @@ import { appReducers } from './store/app.reducer';
         }
       },
     }),
-    StoreModule.forRoot<AppStoreState>(appReducers),
+    StoreModule.forRoot<AppStoreState>(appReducers)
   ],
   exports: [],
   providers: [
