@@ -1,4 +1,4 @@
 export interface Customer {
-  id:number,
+  id:number|null,
   customerNumber:number
 }

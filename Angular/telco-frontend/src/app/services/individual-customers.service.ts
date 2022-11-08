@@ -14,7 +14,7 @@ export class IndividualCustomersService  {
 
   private controllerUrl = `${environment.apiUrl}/individualCustomers`;
 
-  individualCustomerModel$:Observable<IndividualCustomers | null>;
+  individualCustomerModel$:Observable<IndividualCustomers>;
 
   constructor(private httpClient: HttpClient, private store: Store<AppStoreState>) {
 
@@ -29,7 +29,7 @@ export class IndividualCustomersService  {
 
 
 
-  createCustomer(individualCustomer: IndividualCustomers): Observable<IndividualCustomers> {
+  createCustomer(individualCustomer: IndividualCustomers) {
     return this.httpClient.post<IndividualCustomers>(this.controllerUrl, individualCustomer);
   }
 

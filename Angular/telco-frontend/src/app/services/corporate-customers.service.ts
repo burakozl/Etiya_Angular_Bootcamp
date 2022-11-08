@@ -12,12 +12,12 @@ import { setCreateCorporateCustomerModel, } from '../store/customer/customer.act
 })
 export class CorporateCustomersService  {
 
-  CorporateCustomerModel$:Observable<CorporateCustomers | null>;
+  corporateCustomerModel$:Observable<CorporateCustomers>;
 
   private controllerUrl = `${environment.apiUrl}/corporateCustomers`;
 
   constructor(private httpClient: HttpClient,private store: Store<AppStoreState>) {
-    this.CorporateCustomerModel$ = this.store.select(
+    this.corporateCustomerModel$ = this.store.select(
       (state) => state.customer.corporateCustomerModel
     );
   }
@@ -29,8 +29,8 @@ export class CorporateCustomersService  {
     return this.httpClient.get<CorporateCustomers[]>(`${this.controllerUrl}?customerId=${id}`);
   }
 
-  createCustomer(CorporateCustomer: CorporateCustomers): Observable<CorporateCustomers> {
-    return this.httpClient.post<CorporateCustomers>(this.controllerUrl, CorporateCustomer);
+  createCustomer(corporateCustomer: CorporateCustomers): Observable<CorporateCustomers> {
+    return this.httpClient.post<CorporateCustomers>(this.controllerUrl, corporateCustomer);
   }
 
   saveCorporateCustomer(createCorporateCustomer: CorporateCustomers) {
