@@ -17,7 +17,7 @@ export const setCreateCorporateCustomerModel = createAction(
 );
 
 export const setServicesModel = createAction(
-  '[Customer] Set Create Corporate Customer', //* Benzersiz key verdik. Bu action type/id olucak.
+  '[Customer] Set Services Customer', //* Benzersiz key verdik. Bu action type/id olucak.
   props<{ services: Service }>() //* inline bir interface yazdık.
   //* Bu interface'in içindeki property'ler, action'ın içindeki property'ler/payload olucak.
 );

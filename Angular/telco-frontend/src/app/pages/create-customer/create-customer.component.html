@@ -5,7 +5,7 @@
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-3 pb-2 pb-md-0 mb-md-3 text-center">
-              Select {{ title }}
+              {{ title }}
             </h3>
             <div class="col-md-12 mb-4 d-flex justify-content-center" *ngIf="!servicesForm">
               <div class="form-check form-check-inline">
@@ -162,7 +162,7 @@
               </div>
             </form>
 
-            <div *ngIf="servicesForm">
+            <div *ngIf="servicesForm && stepCount === 1">
               <hr class="solid">
               <form [formGroup]="serviceForm">
                 <div class="row">
@@ -176,9 +176,113 @@
                 </div>
               </form>
             </div>
-            <p>{{ serviceForm.value | json }}</p>
-            <div class="mt-4 pt-2">
+
+            <div *ngIf="stepCount === 2">
+              <div *ngIf="isChecked">
+                <div class="row">
+                  <div class="col-lg-12" >
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm">
+                            <p class="mb-0">Customer ID</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{createIndividualCustomer.value.customerId}}</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm">
+                            <p class="mb-0">National Identity</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{createIndividualCustomer.value.nationalIdentity}}</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm">
+                            <p class="mb-0">Full Name</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{createIndividualCustomer.value.firstName}} {{createIndividualCustomer.value.lastName}}</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm">
+                            <p class="mb-0">Birthday</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{createIndividualCustomer.value.dateOfBirth | date:'dd.MM.YYYY'}}</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm">
+                            <p class="mb-0">Servisler</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{serviceForm.value.selectedServices}}</p>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div *ngIf="!isChecked">
+                  <div class="row">
+                    <div class="col-lg-12" >
+                      <div class="card mb-4">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm">
+                              <p class="mb-0">Customer ID</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{createCorporateCustomer.value.customerId}}</p>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm">
+                              <p class="mb-0">Company Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{createCorporateCustomer.value.companyName}}</p>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm">
+                              <p class="mb-0">Tax Number</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{createCorporateCustomer.value.taxNumber}}</p>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm">
+                              <p class="mb-0">Servisler</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{serviceForm.value.selectedServices}}</p>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="mt-4 pt-2" *ngIf="stepCount < 2">
               <button class="btn btn-primary btn-lg" (click)="goNextForm()">Next</button>
+            </div>
+            <div class="mt-4 pt-2" *ngIf="stepCount === 2">
+              <button class="btn btn-primary btn-lg" (click)="saveCustomer()" >Save</button>
             </div>
           </div>
         </div>

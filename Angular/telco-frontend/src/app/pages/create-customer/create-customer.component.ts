@@ -20,10 +20,11 @@ export class CreateCustomerComponent implements OnInit {
   createCorporateCustomer!: FormGroup;
   servicesForm:boolean = false;
   isChecked:boolean = true;
-  title:string = "Customer Type";
+  title:string = "Select Customer Type";
   services!: Service[];
   serviceForm!: FormGroup;
   stepCount:number = 0;
+  checkedServices!:any[];
 
   constructor(
     private formBuilder:FormBuilder,
@@ -70,7 +71,7 @@ export class CreateCustomerComponent implements OnInit {
   goNextForm(){
     if(this.isChecked && this.stepCount === 0 ){
       this.servicesForm = true;
-      this.title = "Services";
+      this.title = "Select Services";
       //this.store.dispatch(this.createIndividualCustomer.value);
       this.saveIndividualStore(this.createIndividualCustomer.value);
       //console.log(this.createIndividualCustomer.value);
@@ -85,7 +86,9 @@ export class CreateCustomerComponent implements OnInit {
     }else if(this.stepCount === 1){
       //Todo : store 'a service kaydını yap
       //özet sayfası gösterilecek
+      this.title = "Summary"
       this.saveServicesStore(this.serviceForm.value);
+      this.stepCount++;
     }else{
       this.toastrService.error("Form alanı zorunludur","Sistem Mesajı :")
     }
@@ -130,6 +133,11 @@ export class CreateCustomerComponent implements OnInit {
     this.servicesService.serviceModel$.subscribe((res) => {
       console.log("services :",res);
     })
+  }
+
+
+  saveCustomer(){
+    
   }
 
 }
