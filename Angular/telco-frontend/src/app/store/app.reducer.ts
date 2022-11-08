@@ -1,4 +1,4 @@
-import { customerReducer } from './customer/customer.reducer';
+import { customerReducer } from './customerToRegister/customer.reducer';
 
 export const appReducers = {
   customer: customerReducer,

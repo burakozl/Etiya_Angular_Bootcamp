@@ -1,4 +1,4 @@
-import { CustomerStoreState } from './customer/customer.state';
+import { CustomerStoreState } from './customerToRegister/customer.state';
 
 export interface AppStoreState {
   customer: CustomerStoreState;

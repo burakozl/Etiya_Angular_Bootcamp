@@ -23,17 +23,17 @@ import { ToastrMessageService } from 'src/app/services/toastr-message.service';
 })
 export class CreateCustomerComponent implements OnInit {
 
-  createIndividualCustomer!: FormGroup;
-  createCorporateCustomer!: FormGroup;
-  servicesForm:boolean = false;
-  isIndividual:boolean = true;
-  title:string = "Select Customer Type";
+  createIndividualCustomer!: FormGroup; // individual form tanımlandı
+  createCorporateCustomer!: FormGroup; //corporate form tanımlandı
+  servicesForm:boolean = false; //ilgili service next butonuna basılmadan gösterilmesin...
+  isIndividual:boolean = true; // burada müşteri tipine göre form göstermek için değişken tanımlandı
+  title:string = "Select Customer Type"; // title dinamik olarak alınıyor değer forma göre değiştiriliyor
   services!: Service[];
-  serviceForm!: FormGroup;
-  stepCount:number = 0;
+  serviceForm!: FormGroup;//service form tanımlandı
+  stepNumber:number = 0; // form steplerini temsil eder ilk gösterilecek form değeri 0'ı gösterir
   individualCustomer!:any;
   corporateCustomer!:any;
-  checkedServices!:Service[];
+  checkedServices!:Service[]; //seçilen servisler burada tutulur...
 
   constructor(
     private formBuilder:FormBuilder,
@@ -52,9 +52,9 @@ export class CreateCustomerComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.createIndividualCustomerForm();
-    this.createCorporateCustomerForm();
-    this.getServices();
+    this.createIndividualCustomerForm(); // individual Formgroup oluşturacak metot
+    this.createCorporateCustomerForm(); // corporate  Formgroup oluşturacak metot
+    this.getServices(); // servisleri sayfa ilk yüklendiğinde çekecek metot
   }
 
   createIndividualCustomerForm(){
@@ -72,41 +72,35 @@ export class CreateCustomerComponent implements OnInit {
     });
   }
 
-  clickCustomerOption(selectedChoice:boolean) {
+  clickCustomerOption(selectedChoice:boolean) { //radio buttondan gelen değer control değerine atar
     this.isIndividual = selectedChoice;
-
   }
 
-  goNextForm(){
-    if(this.isIndividual && this.stepCount === 0 ){
+  goNextForm(){ // next butonuna basıldığında koşullara göre form gösterir
+    if(this.isIndividual && this.stepNumber === 0 ){ // müşteri tipine göre gösterilecek form alanı (individual)
       this.servicesForm = true;
       this.title = "Select Services";
-      //this.store.dispatch(this.createIndividualCustomer.value);
       this.saveIndividualStore(this.createIndividualCustomer.value);
-      //console.log(this.createIndividualCustomer.value);
-      this.stepCount++;
+      this.stepNumber++;
 
-    }else if(!this.isIndividual && this.stepCount === 0){
+    }else if(!this.isIndividual && this.stepNumber === 0){ // müşteri tipine göre gösterilecek form alanı (corporate)
       this.servicesForm = true;
       this.title = "Services";
-      //this.store.dispatch(this.createIndividualCustomer.value);
       this.saveCorporateStore(this.createCorporateCustomer.value);
-      this.stepCount++;
-    }else if(this.stepCount === 1){
-      //Todo : store 'a service kaydını yap
-      //özet sayfası gösterilecek
+      this.stepNumber++;
+    }else if(this.stepNumber === 1){ // (step 2 ) service form
       this.title = "Summary"
       this.saveServicesStore(this.serviceForm.value);
-      this.stepCount++;
+      this.stepNumber++;
 
 
-      const selectedservices = this.services.filter((service) => {
+      const selectedservices = this.services.filter((service) => { //seçilen servisler, services json içersinden filterelenip selectedservices değişkenine atanıyor..
           return this.serviceForm.value.selectedServices.some((selectedService:any) => {
             return selectedService === service.name;
           });
         })
       console.log(selectedservices);
-      this.checkedServices = selectedservices;
+      this.checkedServices = selectedservices; // ilgili değişkeni globale taşır...
 
     }else{
       this.toastrService.error("Form alanı zorunludur","Sistem Mesajı :")
@@ -114,57 +108,57 @@ export class CreateCustomerComponent implements OnInit {
 
   }
 
-  getServices() {
+  getServices() { // servisler servicesService classından get isteği ile services verileri alınır...
     this.servicesService.getServices().subscribe((response) => {
       this.services = response;
    })
   }
 
-  onCheckboxChange(event: any) {
+  onCheckboxChange(event: any) {//listelenen servisler içerisinde ilgili servislerin seçilip seçilmediği işleminin yapıldığı metot
 
     const selectedServices = (this.serviceForm.controls['selectedServices'] as FormArray);
 
-    if (event.target.checked) {
+    if (event.target.checked) {//seçili service arraye push edilir..
       selectedServices.push(new FormControl(event.target.value));
-    } else {
+    } else { // seçili service çıkarılırsa arraydan silinir...
       const index = selectedServices.controls
       .findIndex(x => x.value === event.target.value);
       selectedServices.removeAt(index);
     }
   }
 
-  saveIndividualStore(customer:IndividualCustomers){
+  saveIndividualStore(customer:IndividualCustomers){//individual form değerleri oluşturulan store'a kayıt edilir..
     this.individualCustomerService.saveIndividualCustomer(customer);
     this.individualCustomerService.individualCustomerModel$.subscribe((res) => {
-      this.individualCustomer = res;
+      this.individualCustomer = res;//store'dan alınan individualCustomerModel ilgili değişkene atandı...
       console.log("individual :" , res);
     });
   }
 
-  saveCorporateStore(customer:CorporateCustomers){
+  saveCorporateStore(customer:CorporateCustomers){//corporate form değerleri oluşturulan store'a kayıt edilir..
     this.corporateCustomerService.saveCorporateCustomer(customer);
     this.corporateCustomerService.corporateCustomerModel$.subscribe((res) => {
-      this.corporateCustomer = res;
+      this.corporateCustomer = res;//store'dan alınan corporateCustomer ilgili değişkene atandı...
       console.log("corporate :",res);
     });
   }
 
-  saveServicesStore(services:Service){
+  saveServicesStore(services:Service){//service form değerleri oluşturulan store'a kayıt edilir..
     this.servicesService.saveServices(services);
     this.servicesService.serviceModel$.subscribe((res) => {
-      console.log("services :",res);
+      console.log("services :",res);//store'dan alınan serviceModel ilgili değişkene atandı...
     })
   }
 
 
-  saveCustomer(){
+  saveCustomer(){ // son stepde save butonu ile gerçekleştirilecek işlemler...
     const newCustomer:Customer = {
       id:null,
       customerNumber: Math.floor(10000000 + Math.random() * 90000000)
     }
-    this.customerService.createCustomer(newCustomer).subscribe({
+    this.customerService.createCustomer(newCustomer).subscribe({  //customer json'a post edildi..
       next: (res) => {
-        if(this.isIndividual){//add individual
+        if(this.isIndividual){//individiual customer seçilmiş ise...
           const addToIndividual = {
             id:res.id,
             customerId: res.id,
@@ -173,14 +167,14 @@ export class CreateCustomerComponent implements OnInit {
           };
           console.log(addToIndividual);
 
-          this.individualCustomerService.createCustomer(addToIndividual).subscribe({
+          this.individualCustomerService.createCustomer(addToIndividual).subscribe({//individualCustomer json'a post edildi..
             next:(res) => {
-              this.addServiceSubscriptionAndInvoice(res);
+              this.addServiceSubscriptionAndInvoice(res);//seçilen servislerin,subscription'ların ve invoice'lerin eklenme işlemlerinin yapıldığı metot...
             }
           });
 
-        }else{//add corporate
-          const addToCorporate = {
+        }else{//corporate customer seçilmiş ise...
+          const addToCorporate = {//post edilecek değerler objeye atanıyor..
             id:res.id,
             customerId: res.id,
             ...this.corporateCustomer,
@@ -189,7 +183,7 @@ export class CreateCustomerComponent implements OnInit {
 
           this.corporateCustomerService.createCustomer(addToCorporate).subscribe({
             next:(res) => {
-              this.addServiceSubscriptionAndInvoice(res);
+              this.addServiceSubscriptionAndInvoice(res);//seçilen servislerin,subscription'ların ve invoice'lerin eklenme işlemlerinin yapıldığı metot...
             }
           });
         }
@@ -198,14 +192,14 @@ export class CreateCustomerComponent implements OnInit {
   }
 
   addServiceSubscriptionAndInvoice(customer: any) {
-    this.checkedServices.map((service) => {
+    this.checkedServices.map((service) => {//seçilen servisler
       const subscription: Subscription = {
         customerId: customer.customerId,
         serviceId: service.id,
         dateStarted: new Date().toISOString().split('T')[0],
       };
-      this.subscriptionService.postSubscription(subscription).subscribe({
-        next: (response) => {
+      this.subscriptionService.postSubscription(subscription).subscribe({//service post işlemi
+        next: (response) => { //invoice post için ilgili datalar...
           let date = new Date(response.dateStarted);
           date.setDate(date.getDate() + 28);
           let dateDue = date.toISOString().split('T')[0];
@@ -214,12 +208,12 @@ export class CreateCustomerComponent implements OnInit {
             dateCreated: response.dateStarted,
             dateDue: dateDue,
           };
-          this.invoiceService.postInvoices(invoice).subscribe();
+          this.invoiceService.postInvoices(invoice).subscribe();//invoice post işlemi...
         },
-        error: () => {
+        error: () => {//hata varsa...
           this.toastrService.error('Something went wrong','System Message');
         },
-        complete: () => {
+        complete: () => {//başarıyla tamamlandıysa...
           this.toastrService.success('Kayıt işlemi başarıyla tamamlandı...');
           this.router.navigateByUrl('/customers');
         },

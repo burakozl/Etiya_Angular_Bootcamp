@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
-import { setCreateCorporateCustomerModel, } from '../store/customer/customer.actions';
+import { setCreateCorporateCustomerModel, } from '../store/customerToRegister/customer.actions';
 
 @Injectable({
   providedIn: 'root',
