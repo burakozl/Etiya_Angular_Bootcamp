@@ -12,7 +12,7 @@ import { setCreateCorporateCustomerModel, } from '../store/customerToRegister/cu
 })
 export class CorporateCustomersService  {
 
-  corporateCustomerModel$:Observable<CorporateCustomers>;
+  corporateCustomerModel$:Observable<CorporateCustomers | null>;
 
   private controllerUrl = `${environment.apiUrl}/corporateCustomers`;
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { Catalog } from 'src/app/models/catalog';
+import { CatalogService } from 'src/app/services/catalog.service';
 import { CorporateCustomers } from 'src/app/models/corporateCustomers';
 import { CorporateCustomersService } from 'src/app/services/corporate-customers.service';
 import { Customer } from 'src/app/models/customer';
@@ -23,15 +25,18 @@ export class CustomerDetailComponent implements OnInit {
   customerId!:number;
   subscription!:Subscription[];
   service!:Service[];
+  catalog!:Catalog[];
+  catalogId!:number[];
   serviceId!:number[];
   filteredService!:Service[];
-
+  filteredCatalog!:Catalog[];
 
   constructor(
     private individualCustomerService:IndividualCustomersService,
     private corporateCustomerService:CorporateCustomersService,
     private route:ActivatedRoute,
     private subscriptionsService:SubscriptionsService,
+    private catalogService:CatalogService,
     private servicesService:ServicesService
     ) { }
 
@@ -44,13 +49,11 @@ export class CustomerDetailComponent implements OnInit {
     this.individualCustomerService.getCustomerDetail(this.customerId).subscribe((res)=> {
       this.individualCustomer = res;
       console.log(this.individualCustomer);
-
     });
     this.corporateCustomerService.getCustomerDetail(this.customerId).subscribe((res) =>
     {
       this.corporateCustomer = res;
       console.log(this.corporateCustomer);
-
     })
 }
 
@@ -63,7 +66,8 @@ export class CustomerDetailComponent implements OnInit {
         console.log(err);
       },
       complete: () => {
-        this.getServices();
+          this.getServices();
+          this.getCatalogs();
       },
     });
   }
@@ -81,7 +85,24 @@ export class CustomerDetailComponent implements OnInit {
 
         this.filteredService = this.service.filter(item => this.serviceId.includes(item.id));
         console.log(this.filteredService);
+      },
+    });
+  }
 
+  getCatalogs(){
+    this.catalogService.getCatalog().subscribe({
+      next: (res) => {
+        this.catalog = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        this.catalogId = this.subscription.map(sub => sub.serviceId);
+        console.log(this.serviceId);
+
+        this.filteredCatalog = this.catalog.filter(item => this.serviceId.includes(item.serviceId));
+        console.log(this.filteredService);
       },
     });
   }

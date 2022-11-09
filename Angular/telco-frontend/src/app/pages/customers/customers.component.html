@@ -36,16 +36,14 @@
       " [routerLink]="'/customer-detail/' + individualCustomer.customerId">
       <div class="card">
         <img src="assets/images/img_avatar.png" alt="Avatar" width="300" height="300" />
-        <div style="text-align: center">
+        <div class="mt-2" style="text-align: center">
           <h4>
             <b>{{ individualCustomer.firstName }}
               {{ individualCustomer.lastName }}</b>
           </h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
-            consequuntur similique excepturi nobis, esse praesentium, blanditiis
-            ab quisquam labore ea odit dicta, quam officia repellat dolorem ut
-            optio earum amet?
+            National Identity : {{individualCustomer.nationalIdentity}} <br>
+            Birthday : {{individualCustomer.dateOfBirth | date:'dd.MM.YYYY'}}
           </p>
         </div>
       </div>
@@ -63,16 +61,13 @@
           | filterCorporateCustomers: 'tax':taxNumber
       " [routerLink]="'/customer-detail/' + corporateCustomer.customerId">
       <div class="card">
-        <img src="assets/images/img_avatar.png" alt="Avatar" width="300" height="300" />
-        <div style="text-align: center">
+        <img  src="assets/images/corporate-avatar.png" alt="Avatar" width="300" height="300" />
+        <div  style="text-align: center" >
           <h4>
             <b>{{ corporateCustomer.companyName }}</b>
           </h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
-            consequuntur similique excepturi nobis, esse praesentium, blanditiis
-            ab quisquam labore ea odit dicta, quam officia repellat dolorem ut
-            optio earum amet?
+            Tax Number : {{corporateCustomer.taxNumber}}
           </p>
         </div>
       </div>
