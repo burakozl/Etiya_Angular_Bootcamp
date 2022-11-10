@@ -30,6 +30,8 @@ export class CustomerDetailComponent implements OnInit {
   serviceId!:number[];
   filteredService!:Service[];
   filteredCatalog!:Catalog[];
+  lengthOfIndividual:number = 0;
+  lengthOfCorporate:number = 0;
 
   constructor(
     private individualCustomerService:IndividualCustomersService,
@@ -48,10 +50,12 @@ export class CustomerDetailComponent implements OnInit {
   getCustomer(){
     this.individualCustomerService.getCustomerDetail(this.customerId).subscribe((res)=> {
       this.individualCustomer = res;
+      this.lengthOfIndividual = this.individualCustomer.length;
     });
     this.corporateCustomerService.getCustomerDetail(this.customerId).subscribe((res) =>
     {
       this.corporateCustomer = res;
+      this.lengthOfCorporate = this.corporateCustomer.length;
     })
 }
 
