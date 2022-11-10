@@ -48,12 +48,10 @@ export class CustomerDetailComponent implements OnInit {
   getCustomer(){
     this.individualCustomerService.getCustomerDetail(this.customerId).subscribe((res)=> {
       this.individualCustomer = res;
-      console.log(this.individualCustomer);
     });
     this.corporateCustomerService.getCustomerDetail(this.customerId).subscribe((res) =>
     {
       this.corporateCustomer = res;
-      console.log(this.corporateCustomer);
     })
 }
 

@@ -53,13 +53,13 @@ export class CreateCustomerComponent implements OnInit {
       if(res != null) this.corporateCustomer = res; //store'dan alınan corporateCustomer ilgili değişkene atandı...
       this.createCorporateCustomerForm(); // corporate  Formgroup oluşturacak metot
     });
-
   }
 
   createIndividualCustomerForm(){
     this.createIndividualCustomer = this.formBuilder.group({
       firstName: [this.individualCustomer?.firstName ?? '', Validators.required],
       lastName: [this.individualCustomer?.lastName ?? '', Validators.required],
+      nationalIdentity: [this.individualCustomer?.nationalIdentity ?? '', [Validators.required,Validators.minLength(11),Validators.maxLength(11)]],
       dateOfBirth:[this.individualCustomer?.dateOfBirth ?? '',Validators.required]
     });
   }

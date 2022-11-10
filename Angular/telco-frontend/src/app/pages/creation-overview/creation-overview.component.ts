@@ -74,8 +74,7 @@ export class CreationOverviewComponent implements OnInit {
           const addToIndividual = {
             id:res.id,
             customerId:res.id,
-            ...this.individualCustomer,
-            nationalIdentity: Math.floor(10000000000 + Math.random() * 9000000000),
+            ...this.individualCustomer
           };
           console.log(addToIndividual);
 

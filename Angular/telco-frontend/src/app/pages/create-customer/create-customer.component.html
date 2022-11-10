@@ -26,6 +26,33 @@
             </div>
             <form *ngIf="isIndividual && !servicesForm" [formGroup]="createIndividualCustomer">
               <div class="row">
+                <div class="col-md-12 mb-4">
+                  <label class="form-label" for="nationalIdentity">National Identity</label>
+                  <div class="form-outline">
+                    <input type="text" id="nationalIdentity" class="form-control form-control-lg"
+                      formControlName="nationalIdentity" />
+                    <div *ngIf="
+                      createIndividualCustomer.get('nationalIdentity')?.hasError('required') &&
+                      (createIndividualCustomer.dirty || createIndividualCustomer.touched)
+                    " class="alert alert-danger" role="alert">
+                      National Identity is required
+                    </div>
+                    <div *ngIf="
+                      createIndividualCustomer.get('nationalIdentity')?.hasError('minlength') &&
+                      (createIndividualCustomer.dirty || createIndividualCustomer.touched)
+                    " class="alert alert-danger" role="alert">
+                      National Identity minimum length must be 11 digits
+                    </div>
+                    <div *ngIf="
+                      createIndividualCustomer.get('nationalIdentity')?.hasError('maxlength') &&
+                      (createIndividualCustomer.dirty || createIndividualCustomer.touched)
+                    " class="alert alert-danger" role="alert">
+                      National Identity maximum length must be 11 digits
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-md-6 mb-4">
                   <label class="form-label" for="firstName">First Name</label>
                   <div class="form-outline">

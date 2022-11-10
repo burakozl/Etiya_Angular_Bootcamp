@@ -10,7 +10,7 @@
                 <div class="col-sm-3" *ngFor="let catalog of catalogs">
                   <div class="quiz_card_area">
                     <input class="quiz_checkbox" type="checkbox" id="1" value="1" formArrayName="selectedCatalogs"
-                      [value]="catalog.name" (change)="onCheckboxChange($event)" />
+                      [value]="catalog.name" (change)="onCheckboxChange($event)"/>
                     <div class="single_quiz_card">
                       <div class="quiz_card_content">
                         <div class="quiz_card_icon">

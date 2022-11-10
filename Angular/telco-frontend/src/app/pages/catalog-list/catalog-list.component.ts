@@ -36,7 +36,7 @@ export class CatalogListComponent implements OnInit {
     })
   }
 
-  onCheckboxChange(event: any) { //listelenen servisler içerisinde ilgili servislerin seçilip seçilmediği işleminin yapıldığı metot
+  onCheckboxChange(event?: any) { //listelenen servisler içerisinde ilgili servislerin seçilip seçilmediği işleminin yapıldığı metot
 
     const selectedCatalogs = (this.catalogForm.controls['selectedCatalogs'] as FormArray);
 
@@ -73,5 +73,6 @@ export class CatalogListComponent implements OnInit {
   goBackForm(){
     this.router.navigateByUrl('/create-customer');
   }
+
 
 }

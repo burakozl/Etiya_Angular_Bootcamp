@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row mt-5" *ngIf="customerId % 2 === 1">
+  <div class="row mt-5" *ngIf="individualCustomer.length > 0">
     <div class="col-lg-4">
       <div class="card mb-4" *ngFor="let item of individualCustomer">
         <div class="card-body text-center">
@@ -70,7 +70,7 @@
     </div>
   </div>
 
-  <div class="row mt-5" *ngIf="customerId % 2 === 0">
+  <div class="row mt-5" *ngIf="corporateCustomer.length > 0">
     <div class="col-lg-4">
       <div class="card mb-4" *ngFor="let item of corporateCustomer">
         <div class="card-body text-center">
