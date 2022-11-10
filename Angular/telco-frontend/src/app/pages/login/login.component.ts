@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
         },
         error: (err) => {
           this.errorMessage = err.message;
+          this.toasterService.error('Kulanıcı bulunamadı','Sistem mesajı');
         },
         complete: () => {
           this.localStorageService.set('token', this.data.access_token);

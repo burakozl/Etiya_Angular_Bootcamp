@@ -1,4 +1,4 @@
-<section class="vh-100 gradient-custom">
+<section class="gradient-custom">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
@@ -22,7 +22,7 @@
               </div>
             </div>
             <div style="display: flex; justify-content: center;">
-              <img src="assets/images/createCustomer.png" alt="create-customer-image" width="500" height="300"/>
+              <img class="card-img" src="assets/images/createCustomer.png" alt="create-customer-image" width="500" height="300"/>
             </div>
             <form *ngIf="isIndividual && !servicesForm" [formGroup]="createIndividualCustomer">
               <div class="row">
@@ -30,7 +30,7 @@
                   <label class="form-label" for="nationalIdentity">National Identity</label>
                   <div class="form-outline">
                     <input type="text" id="nationalIdentity" class="form-control form-control-lg"
-                      formControlName="nationalIdentity" />
+                      formControlName="nationalIdentity" maxlength="11"/>
                     <div *ngIf="
                       createIndividualCustomer.get('nationalIdentity')?.hasError('required') &&
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
@@ -42,12 +42,6 @@
                       (createIndividualCustomer.dirty || createIndividualCustomer.touched)
                     " class="alert alert-danger" role="alert">
                       National Identity minimum length must be 11 digits
-                    </div>
-                    <div *ngIf="
-                      createIndividualCustomer.get('nationalIdentity')?.hasError('maxlength') &&
-                      (createIndividualCustomer.dirty || createIndividualCustomer.touched)
-                    " class="alert alert-danger" role="alert">
-                      National Identity maximum length must be 11 digits
                     </div>
                   </div>
                 </div>

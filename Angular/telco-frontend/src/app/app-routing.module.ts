@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginGuard } from './guards/login.guard';
 import { NgModule } from '@angular/core';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 const routes: Routes = [
   {path: "", pathMatch: 'full', redirectTo : 'home'},
@@ -45,6 +46,10 @@ const routes: Routes = [
     component: CatalogListComponent,
     canActivate: [LoginGuard],
   },
+  {
+    path: '**',
+    component: NotFoundPageComponent
+  }
 ];
 
 @NgModule({

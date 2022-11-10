@@ -59,7 +59,7 @@ export class CreateCustomerComponent implements OnInit {
     this.createIndividualCustomer = this.formBuilder.group({
       firstName: [this.individualCustomer?.firstName ?? '', Validators.required],
       lastName: [this.individualCustomer?.lastName ?? '', Validators.required],
-      nationalIdentity: [this.individualCustomer?.nationalIdentity ?? '', [Validators.required,Validators.minLength(11),Validators.maxLength(11)]],
+      nationalIdentity: [this.individualCustomer?.nationalIdentity ?? '', [Validators.required,Validators.minLength(11)]],
       dateOfBirth:[this.individualCustomer?.dateOfBirth ?? '',Validators.required]
     });
   }

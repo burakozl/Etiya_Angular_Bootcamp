@@ -1,16 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { LocalStorageService } from './local-storage.service';
 import { Observable } from 'rxjs';
+import { TokenUserModel } from '../models/tokenUserModel';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
-import { LocalStorageService } from './local-storage.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthLoginService {
   private controllerUrl = `${environment.apiUrl}/auth`;
+  tokenUserModel: TokenUserModel | null = null;
 
   constructor(private httpClient: HttpClient,private localStorage:LocalStorageService,private jwtHelperService:JwtHelperService) { }
 

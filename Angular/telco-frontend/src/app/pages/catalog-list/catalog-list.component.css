@@ -53,7 +53,7 @@
 .quiz_card_title h3 i{opacity: 0;}
 .quiz_card_icon{
     max-width: 100%;
-    min-height: 135px;
+    min-height: 300px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -144,6 +144,23 @@
     rgba(105, 157, 212, 1)
   );
 }
+
+@media screen and (max-width: 660px) {
+  .buttons{
+    flex-direction: column;
+  }
+
+}
+@media screen and (max-width: 992px) {
+  .buttons{
+    justify-content: center;
+  }
+  .quiz_backBtn{
+    margin-right: 20px;
+  }
+}
+
+
 
 
 

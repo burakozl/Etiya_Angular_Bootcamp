@@ -60,9 +60,6 @@ export class CreationOverviewComponent implements OnInit {
       this.checkedCatalogs = res;
     })
   }
-  goBackForm(){
-    this.router.navigateByUrl('/catalog-list');
-  }
 
   saveCustomer(){ // son stepde save butonu ile gerçekleştirilecek işlemler...
     const newCustomer:Customer = {

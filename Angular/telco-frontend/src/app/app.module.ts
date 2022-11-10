@@ -35,6 +35,7 @@ import { appReducers } from './store/app.reducer';
 import { CreateServicesComponent } from './pages/create-services/create-services.component';
 import { CreationOverviewComponent } from './pages/creation-overview/creation-overview.component';
 import { CatalogListComponent } from './pages/catalog-list/catalog-list.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CatalogListComponent } from './pages/catalog-list/catalog-list.componen
     CreateCustomerComponent,
     CreateServicesComponent,
     CreationOverviewComponent,
-    CatalogListComponent
+    CatalogListComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,

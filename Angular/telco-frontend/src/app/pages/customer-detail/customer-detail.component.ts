@@ -56,7 +56,7 @@ export class CustomerDetailComponent implements OnInit {
     {
       this.corporateCustomer = res;
       this.lengthOfCorporate = this.corporateCustomer.length;
-    })
+    });
 }
 
   getSubscriptions(){
