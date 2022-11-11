@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TokenUserModel } from 'src/app/models/tokenUserModel';
 import { AuthLoginService } from 'src/app/services/auth-login.service';
 import { Observable } from 'rxjs';
+import { ToastrMessageService } from 'src/app/services/toastr-message.service';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private authLoginService: AuthLoginService,
+    private toastrService:ToastrMessageService
   ) {
     this.tokenUserModel$ = this.authLoginService.tokenUserModel$;
   }
