@@ -27,14 +27,14 @@
   </form>
 
   <div class="row" *ngIf="selectedCustomer">
-    <div class="col-sm-12 col-md-3 mb-5" *ngFor="
+    <div class="col-sm-12 col-md-4 col-lg-3 mb-5" *ngFor="
         let individualCustomer of individuals
           | filterService: 'name':customerName
           | filterService: 'id':nationalId
           | filterService: 'birthDay':dateOfBirth
       " [routerLink]="'/customer-detail/' + individualCustomer.customerId">
       <div class="card">
-        <img src="assets/images/img_avatar.png" alt="Avatar" width="300" height="300" />
+        <img src="assets/images/img_avatar.png" alt="Avatar" width="auto" height="auto" />
         <div class="mt-2" style="text-align: center">
           <h4>
             <b>{{ individualCustomer.firstName }}
@@ -54,13 +54,13 @@
     <label class="mx-2">Tax Number:</label><input type="text" name="taxNumber" [(ngModel)]="taxNumber" />
   </form>
   <div class="row" *ngIf="!selectedCustomer">
-    <div class="col-sm-12 col-md-3 mb-5" *ngFor="
+    <div class="col-sm-12 col-md-4 col-lg-3 mb-5" *ngFor="
         let corporateCustomer of corporates
           | filterCorporateCustomers: 'companyName':companyName
           | filterCorporateCustomers: 'tax':taxNumber
       " [routerLink]="'/customer-detail/' + corporateCustomer.customerId">
       <div class="card">
-        <img  src="assets/images/corporate-avatar.png" alt="Avatar" width="300" height="300" />
+        <img  src="assets/images/corporate-avatar.png" alt="Avatar" width="auto" height="auto" />
         <div  style="text-align: center" >
           <h4>
             <b>{{ corporateCustomer.companyName }}</b>
