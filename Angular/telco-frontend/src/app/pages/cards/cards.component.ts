@@ -41,7 +41,7 @@ export class CardsComponent implements OnInit {
         //Observer design pattern
         this.services = response;
       });
-    }, 200);
+    }, 500);
   }
 
   edit(service: Service) {
